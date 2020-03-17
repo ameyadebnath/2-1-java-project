@@ -24,11 +24,11 @@ public class MyProject extends Application {
     
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
-        		
+        // taking background image input
          Image image = new Image(new FileInputStream("F:\\java basic\\2_1 project\\MyProject\\src\\myproject\\interface.jpg"));  
       
       ImageView imageView = new ImageView(image); 
-      
+      //setting size
       imageView.setX(20); 
       imageView.setY(20); 
 
@@ -36,21 +36,26 @@ public class MyProject extends Application {
       imageView.setFitWidth(600); 
     
       imageView.setPreserveRatio(true);  
+        //creating button
       Button btn=new Button("continue to play");
+        //setting button size
       btn.setLayoutX(250);
       btn.setLayoutY(390);
       
       Group root = new Group();
+        //adding image and button to the screen
       root.getChildren().add(imageView);  
       root.getChildren().add(btn);  
-      
+      //declaring scene size
       Scene scene = new Scene(root, 650, 650);  
     
      
       primaryStage.setScene(scene);
        JFrame f=new JFrame();
+        //taking player's name from user
         String name=JOptionPane.showInputDialog(f,"Player's name?");
        primaryStage.setTitle(" WELCOME "+name+" to the gaming world");  
+        //showing stage
       primaryStage.show(); 
       
     }
