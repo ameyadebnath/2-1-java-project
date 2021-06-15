@@ -7,7 +7,7 @@ package game1;
 
 /**
  *
- * @author USER
+ * @author Ameya Debnath
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
