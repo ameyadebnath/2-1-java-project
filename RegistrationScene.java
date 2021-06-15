@@ -39,7 +39,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author USER
+ * @author Ameya Debnath
  */
 public class RegistrationScene extends Scene{
      private GridPane grid;
