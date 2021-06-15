@@ -39,25 +39,19 @@ public class ResetPassword {
    {
    
        System.out.println("matched code");
-      
-//       String password=JOptionPane.showInputDialog(frame,"GIVE NEW PASSWORD");//taking new password from user
-
-//new
-
- String password="";
+      // String password=JOptionPane.showInputDialog(frame,"GIVE NEW PASSWORD");//taking new password from user
+      String password="";
  
 JPasswordField pf = new JPasswordField();//Creating JPasswordField
 
-int okCxl = JOptionPane.showConfirmDialog(null, pf, "Enter New Password", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);//sending message
+int okCxl = JOptionPane.showConfirmDialog(null, pf, "Enter Password", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);//sending message
 
 if (okCxl == JOptionPane.OK_OPTION) {
     
     password = new String(pf.getPassword());//taking passeord from user
     
   System.err.println("You entered: " + password);
-  
 }
-
        
        try {
            

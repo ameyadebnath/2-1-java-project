@@ -5,6 +5,7 @@
  */
 package game1;
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -29,13 +30,13 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javax.mail.MessagingException;
+//import javax.mail.MessagingException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author USER
+ * @author Ameya Debnath
  */
 public class InitialScene extends Scene {
 
@@ -133,7 +134,7 @@ public class InitialScene extends Scene {
         //image1 specification starts:
         Image image;
         try {
-            image = new Image(new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\waterfall.gif")); //path of the image is given here for first scene;
+            image = new Image(new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\waterfall.gif")); //path of the image is given here for first scene;
 
             this.backgroundImg = new ImageView(image);
 
@@ -151,6 +152,11 @@ public class InitialScene extends Scene {
          +"-fx-background-color:LIGHTBLUE"
          ;//here the styles of the button is added
             playButton.setStyle(styles);//the style is passed as a parameter
+            String styleTextBox=
+                    "-fx-background-color: -fx-text-box-border, -fx-background ;"
+                    +"-fx-background-insets: 0, 0 0 1 0 ;"
+                    +"-fx-background-radius: 0 ;"
+                    +"-fx-background-color: -fx-focus-color, -fx-background ;";
                     
   
             this.registerButton=new Button("CLICK TO REGISTER");//the button name is passed here as a parameter 
@@ -165,11 +171,12 @@ public class InitialScene extends Scene {
 
             //here we are adding a text field to take name as input from the user
             this.nickNameField = new TextField();
-
+           // nickNameField.setStyle(styleTextBox);
             nickNameField.setAlignment(Pos.CENTER);//the position of this field is passed
             nickNameField.setPrefWidth(200);//the width is passed as a parameter
             nickNameField.setLayoutX(240);//the position of it in x axis is the parameter
             nickNameField.setLayoutY(260);//the position of it in y axis is the parameter
+           
             //adding completed..
             
             //here we are adding password field to take password as input fromt the user
@@ -185,7 +192,7 @@ public class InitialScene extends Scene {
             layout.getChildren().add(nickNameField);//here we are adding the textfield to the layout.
             layout.getChildren().add(registerButton);//registerButton is added to the layout
             layout.getChildren().add(passField);//passwordfield is added to the layout
-            layout.getChildren().addAll(text1,text2,text3,text,okButton);//all the texts and ok button is added to the layout
+            layout.getChildren().addAll(text,text1,text2,text3,okButton);//all the texts and ok button is added to the layout
             okButton.setOnAction(e->System.out.println("user_id "+nickNameField.getText()+"password "+passField.getText()));
 
         } catch (FileNotFoundException ex) {

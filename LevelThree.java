@@ -6,6 +6,7 @@
 package game1;
 
 import static game1.GAME1.setupGame;
+import static game1.GameScene.lifeLine;
 import static game1.LevelTwo.playerScore;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -49,7 +50,7 @@ import javafx.util.Duration;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *This class is in charge of the level 3 of this game
  * @author USER
  */
 public class LevelThree extends GAME1{
@@ -65,6 +66,7 @@ public class LevelThree extends GAME1{
      static int labelY2=390;
      static int labelY3=225;
      static int labelY4= 350; 
+     private static Label lifeSpan3=new Label();
      private static  Integer STARTTIME3 = 70;
     private static Timeline timeLine3;
     private static Label timerLabel3 = new Label();
@@ -74,7 +76,14 @@ public class LevelThree extends GAME1{
      private static Rectangle eneMy1=EnemyClass.getEnemy1();
     private static Rectangle eneMy2=Enemy2.getEnemy2();
     private static Rectangle eneMy3=Level2Enemy3.getEnemy3();
-                
+       
+    /**
+     * Sets up the whole interface and control of level 3.
+     * @param gp
+     * @param scene
+     * @param root
+     * @throws FileNotFoundException 
+     */
     public static void levelThreeScene(Group gp,Scene scene,VBox root)throws FileNotFoundException{
         
         
@@ -92,7 +101,7 @@ public class LevelThree extends GAME1{
         targetMotion.setCycleCount(Animation.INDEFINITE);*/
      
         
-      Image image = new Image(new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\surface.png")); //path of the image is given here for first scene;
+      Image image = new Image(new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\surface.png")); //path of the image is given here for first scene;
 
             
             // ScrollPane scrollPane2 = new ScrollPane();
@@ -103,7 +112,7 @@ public class LevelThree extends GAME1{
              
              timerLabel3.textProperty().bind(timeSeconds3.asString());//creating label for the timing binder
         timerLabel3.setTextFill(Color.BLACK);//setting color of the label
-        timerLabel3.setLayoutX(390);//passing the coordinate of x axis as a parameter
+        timerLabel3.setLayoutX(330);//passing the coordinate of x axis as a parameter
         timerLabel3.setLayoutY(0);//passing the coordinate of y axis as a parameter
         timerLabel3.setStyle("-fx-font-size: 1.2em;");//passing the style of the label
         if (timeLine3 != null) {
@@ -116,7 +125,7 @@ public class LevelThree extends GAME1{
                 timeLine3.playFromStart();
                 Label timer=new Label("TIMER:");
                 timer.setTextFill(Color.BLACK);//passing the color of the label as the parameter
-                timer.setLayoutX(340);//passing x coordinate as parameter
+                timer.setLayoutX(280);//passing x coordinate as parameter
                 timer.setLayoutY(0);//passing y coordinate as parameter
                 timer.setStyle("-fx-font-size: 1.3em;");//passing style as a parameter
                
@@ -124,20 +133,36 @@ public class LevelThree extends GAME1{
              Label goal = new Label("GOAL:70");//the parameter is a string which will show the target of the player in the console
         goal.setTextFill(Color.BLACK);//passing the color of the label as the parameter
         goal.setStyle("-fx-font-size: 1.2em;");///passing style as a parameter
-      goal.setLayoutX(200);//x coordinate as parameter
+      goal.setLayoutX(140);//x coordinate as parameter
        goal.setLayoutY(0);//Y coordinate as parameter
         Label score=new Label("SCORE:");//new label
         score.setTextFill(Color.BLACK);//passing color as parameter
         score.setStyle("-fx-font-size: 1.2em;");//passing style as a parameter
-      score.setLayoutX(270);//x coordinate as parameter
+      score.setLayoutX(210);//x coordinate as parameter
       score.setLayoutY(0);//Y coordinate as parameter
       
          Label plrScore=new Label();//new label object
         plrScore.setTextFill(Color.BLACK);
         plrScore.setText(Integer.toString(playerScore));//setting the score which is a variable and making it string
         plrScore.setStyle("-fx-font-size: 1.2em;");//passing style as a parameter
-        plrScore.setLayoutX(320);//x coordinate as parameter
+        plrScore.setLayoutX(260);//x coordinate as parameter
         plrScore.setLayoutY(0);//Y coordinate as parameter
+        
+         Label life=new Label("LIFE:");
+        life.setTextFill(Color.BLACK);
+        life.setAlignment(Pos.BOTTOM_CENTER);
+        life.setLayoutX(360);
+        life.setLayoutY(0);
+        life.setStyle("-fx-font-size: 1.3em;");
+       
+       // Label lifeSpan=new Label();//new label object
+        lifeSpan3.setTextFill(Color.BLACK);
+        lifeSpan3.setAlignment(Pos.BOTTOM_CENTER);
+        lifeSpan3.setText(Integer.toString(lifeLine));//setting the score which is a variable and making it string
+       lifeSpan3.setLayoutX(390);
+       lifeSpan3.setLayoutY(0);
+        lifeSpan3.setStyle("-fx-font-size: 1.3em;");
+      
         
             ImageView img_exp=new ImageView(image);
         
@@ -145,7 +170,7 @@ public class LevelThree extends GAME1{
         marks.getChildren().add(img_exp);//adding image
         img_exp.setFitWidth(650); //passing width so that it matches the width of the group primarily
         img_exp.setFitHeight(20);//passing width so that it matches the width of the group primarily
-        marks.getChildren().addAll(goal,score,plrScore,timer,timerLabel3); //adding elements to the group
+        marks.getChildren().addAll(goal,score,plrScore,timer,timerLabel3,life,lifeSpan3); //adding elements to the group
              
               ArrayList<Line> lineArrayList = new ArrayList<Line>();//declaration of a arraylist of line which will form the maze
         lineArrayList.add(new Line(2.0,3.00,838.0,3.0));//passing the coordinates of start and ending point of the line
@@ -207,11 +232,11 @@ public class LevelThree extends GAME1{
              
             ImageView backgroundImg = new ImageView(image);
             Rectangle rect=new Rectangle(10,10,40,40);
-            FileInputStream input = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\shredder.png");//adding image to the character
+            FileInputStream input = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\shredder.png");//adding image to the character
         Image img3 = new Image(input);//passing image object as parameter
         ImagePattern image_pattern = new ImagePattern(img3, 10, 10, 1, 1, true);//passing image object,coordinates,ratio as parameter
         
-         FileInputStream inputBullet = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\bomb.png");//adding character to the bullet
+         FileInputStream inputBullet = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\ScrollingImage\\src\\bomb.png");//adding character to the bullet
         Image imgBullet = new Image(inputBullet);//passing image object as parameter
       //  ImagePattern imgptrn_bullet = new ImagePattern(imgBullet, projectileRadius, 10, 1, 1, true);//passing image object,coordinates,ratio as parameter
                  
@@ -245,7 +270,7 @@ public class LevelThree extends GAME1{
         Rectangle rectShield=ProtectiveSuit.suitCreation(gp);//-------------------------------------------------------------------->sheild
         Rectangle shootingSkull=ShootingSkull.skullCreation(gp, rect);//------------------------------------------------------------------------>adding pistol
         //adding picture to the coin
- FileInputStream inputCoin = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\download.jpg");
+ FileInputStream inputCoin = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\download.jpg");
         Image imgCoin = new Image(inputCoin);
         ImagePattern image_Coin = new ImagePattern(imgCoin, 340, 350, 1,1 , true);        
        Circle circle1 = new Circle(); //creating circle as object
@@ -256,7 +281,7 @@ circle1.setFill(image_Coin);
 
 
 //diamond coin making
-      FileInputStream inputCoind = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\vector-diamonds.png");
+      FileInputStream inputCoind = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\vector-diamonds.png");
         Image imgCoind = new Image(inputCoind);
         ImagePattern image_Coind = new ImagePattern(imgCoind, 330, 350, 1,1 , true);        
        Circle circle2 = new Circle(); 
@@ -555,9 +580,9 @@ circle3.setFill(image_Coin);
            
             if(playerScore>=70 && timeSeconds3.getValue()>0)
             {
-                
+                 setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\winning.wav");//activating music
                 JOptionPane.showMessageDialog(null, "YOU WIN");
-                setupGame("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\winning.wav");//activating music
+                
                 
             }
             else
@@ -568,6 +593,8 @@ circle3.setFill(image_Coin);
                 scrollPane2.setHvalue(0);
                 scrollPane2.setVvalue(0);
                playerScore=0;
+               Label life2=LevelThree.getLabelso();
+               life2.setText(Integer.toString(GameScene.lifeLine));
                  if(k==2){
               rectShield.setLayoutX(rectShield.getLayoutX()+60);
               rectShield.setLayoutY(rectShield.getLayoutY()-66.67);
@@ -713,7 +740,9 @@ circle3.setFill(image_Coin);
         
     }
      
-   
+   /**
+    * Stops the timer
+    */
   public static void timerStop(){
          STARTTIME3=70;
          
@@ -730,11 +759,16 @@ circle3.setFill(image_Coin);
                 
      }             
      
-                
+         /**
+          * Sets the scroll bar of the scroll pane in it's initial position
+          */       
      public static void autoScroll2(){
                 scrollPane2.setHvalue(0);
                 scrollPane2.setVvalue(0);  
                 playerScore=0;
      }
+      public static Label getLabelso(){
+        return lifeSpan3;
+    }
     
 }

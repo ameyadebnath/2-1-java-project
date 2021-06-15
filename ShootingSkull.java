@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * File:GAME1.java
  */
 package game1;
 
@@ -27,8 +25,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 /**
- *
- * @author USER
+ *This class mainly works on the skull feature of the game
+ * @author Tahsina Bintay Azam
+ * 
  */
 public class ShootingSkull {
      private static  Integer STARTTIME7 = 2;
@@ -40,9 +39,16 @@ public class ShootingSkull {
     private static Rectangle eneMy2=Enemy2.getEnemy2();
     private static Rectangle eneMy3=Level2Enemy3.getEnemy3();
     private static int i=2;
+    /**
+     * Here the object skull is created
+     * @param layout
+     * @param rect
+     * @return javafx.scene.shape.Rectangle
+     * @throws FileNotFoundException 
+     */
     public static Rectangle skullCreation(Group layout, Rectangle rect) throws FileNotFoundException{
         Rectangle shootingPistol=new Rectangle(15,340,40,40);
-        FileInputStream inputShield = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\skull (1).png");//adding image to the character
+        FileInputStream inputShield = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\skull (1).png");//adding image to the character
         Image imgShield = new Image(inputShield);//passing image object as parameter
         ImagePattern image_Shield = new ImagePattern(imgShield, 156,390, 1, 1, true);//passing image object,coordinates,ratio as parameter
        shootingPistol.setFill(image_Shield);
@@ -64,6 +70,9 @@ public class ShootingSkull {
                return shootingPistol; 
                 
     }
+    /**
+     * Starts the timer
+     */
      public static void startTimer(){
      STARTTIME7=2;
         if (timeLine7 != null) {

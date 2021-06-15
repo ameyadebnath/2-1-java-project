@@ -34,26 +34,36 @@ import javafx.util.Duration;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author USER
+ *This class is in charge of the level 1 of this game. 
+ * @author Tahsina Bintay Azam
  */
 public class GameScene extends GAME1{
     private static int x = 2;
     private static int y = 2;
     private static int z = 2;
-     static int playerScore=0;
-      private static  Integer STARTTIME = 50;
+    static int playerScore=0;
+    static int lifeLine=100;
+    private static Label lifeSpan=new Label();//new label object
+    private static  Integer STARTTIME = 50;
     private static Timeline timeline;
     private static Label timerLabel = new Label();
     private static IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
     private ArrayList<Line> lineArrayList;
+    
+    /**
+     * Creates the environment of the level 1 of this game
+     * @param layout
+     * @param scn
+     * @param window
+     * @throws FileNotFoundException 
+     */
      public static void gameScene(Group layout, Scene scn,Stage window) throws FileNotFoundException{
             //image2
-       Image image1 = new Image(new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\surface.png"));//image2 file path is given here.
+       Image image1 = new Image(new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\surface.png"));//image2 file path is given here.
         ImageView img = new ImageView(image1);//passing image as the parameter
 
         //adding pictures to rectangle below:
-        FileInputStream input = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\shredder.png");
+        FileInputStream input = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\shredder.png");
         Image img3 = new Image(input);//passing image object as parameter
         ImagePattern image_pattern = new ImagePattern(img3, 15, 15, 1, 1, true);//passing image object,coordinates,ratio as parameter
         Rectangle rect = new Rectangle(15, 15, 40, 40);//passing coordinates as parameters
@@ -61,7 +71,7 @@ public class GameScene extends GAME1{
        
         
         //adding picture to the coin
- FileInputStream inputCoin = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\download.jpg");
+ FileInputStream inputCoin = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\download.jpg");
         Image imgCoin = new Image(inputCoin);
         ImagePattern image_Coin = new ImagePattern(imgCoin, 340, 350, 1,1 , true);        
        Circle circle1 = new Circle(); //creating circle as object
@@ -72,7 +82,7 @@ circle1.setFill(image_Coin);
 
 
 //diamond coin making
-      FileInputStream inputCoind = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\vector-diamonds.png");
+      FileInputStream inputCoind = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\vector-diamonds.png");
         Image imgCoind = new Image(inputCoind);
         ImagePattern image_Coind = new ImagePattern(imgCoind, 330, 350, 1,1 , true);        
        Circle circle2 = new Circle(); 
@@ -136,8 +146,8 @@ circle3.setFill(image_Coin);
        
        timerLabel.textProperty().bind(timeSeconds.asString());//label adding
         timerLabel.setTextFill(Color.BLACK);
-        timerLabel.setPadding(new Insets(570,570, 390,390));
-        timerLabel.setStyle("-fx-font-size: 1.1em;");
+        timerLabel.setPadding(new Insets(570,570, 335,335));
+        timerLabel.setStyle("-fx-font-size: 1.3em;");
         if (timeline != null) {
                     timeline.stop();
                 }
@@ -155,30 +165,44 @@ circle3.setFill(image_Coin);
                 Label timer=new Label("TIMER:");
                 timer.setTextFill(Color.BLACK);//passing the color of the label as the parameter
                 timer.setAlignment(Pos.BOTTOM_CENTER);//passing the position of the label
-                timer.setPadding(new Insets(570,570, 340, 340));//passing the coordinates of the label ,first two for x and others are for y axis
-                timer.setStyle("-fx-font-size: 1.1em;");
+                timer.setPadding(new Insets(570,570, 285, 285));//passing the coordinates of the label ,first two for x and others are for y axis
+                timer.setStyle("-fx-font-size: 1.3em;");
                 layout.getChildren().add(timer);
        
        Label goal = new Label("GOAL:50");//the parameter is a string which will show the target of the player in the console
         goal.setTextFill(Color.BLACK);//passing the color of the label as the parameter
         goal.setAlignment(Pos.BOTTOM_CENTER);//passing the position of the label
-        goal.setPadding(new Insets(570,570, 200, 200));//passing the coordinates of the label ,first two for x and others are for y axis
-         goal.setStyle("-fx-font-size: 1.1em;");///newwwwllllyyy added
+        goal.setPadding(new Insets(570,570, 140, 140));//passing the coordinates of the label ,first two for x and others are for y axis
+         goal.setStyle("-fx-font-size: 1.3em;");///newwwwllllyyy added
         layout.getChildren().add(goal);//adding the label by passing it's object
         Label score=new Label("SCORE:");//new label
         score.setTextFill(Color.BLACK);//passing color
         score.setAlignment(Pos.BOTTOM_CENTER);//passing position as parametere
-        score.setPadding(new Insets(570,570, 270,270));//passing coordinates as parameter
-        score.setStyle("-fx-font-size: 1.1em;");
+        score.setPadding(new Insets(570,570, 210,210));//passing coordinates as parameter
+        score.setStyle("-fx-font-size: 1.3em;");
         layout.getChildren().add(score);//adding to the console by passing label's object
         
          Label plrScore=new Label();//new label object
         plrScore.setTextFill(Color.BLACK);
         plrScore.setAlignment(Pos.BOTTOM_CENTER);
         plrScore.setText(Integer.toString(playerScore));//setting the score which is a variable and making it string
-        plrScore.setPadding(new Insets(570,570,320,320));
+        plrScore.setPadding(new Insets(570,570,260,260));
         plrScore.setStyle("-fx-font-size: 1.3em;");
         layout.getChildren().add(plrScore);//adding the score
+        Label life=new Label("LIFE:");
+        life.setTextFill(Color.BLACK);
+        life.setAlignment(Pos.BOTTOM_CENTER);
+        life.setPadding(new Insets(570,570,360,360));
+        life.setStyle("-fx-font-size: 1.3em;");
+        layout.getChildren().add(life);
+      //  Label lifeSpan=new Label();//new label object
+        lifeSpan.setTextFill(Color.BLACK);
+        lifeSpan.setAlignment(Pos.BOTTOM_CENTER);
+        lifeSpan.setText(Integer.toString(lifeLine));//setting the score which is a variable and making it string
+        lifeSpan.setPadding(new Insets(570,570,400,400));
+        lifeSpan.setStyle("-fx-font-size: 1.3em;");
+        layout.getChildren().add(lifeSpan);
+        
         
         EnemyClass.enemyChar(rect,layout,plrScore,1);//calling enemy class
         Enemy2.enemyChar(rect, layout,plrScore,1);//calling another
@@ -405,9 +429,8 @@ circle3.setFill(image_Coin);
             {
                 
                 playerScore=0;
-                
+                 setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\winning.wav");//activating music
                 JOptionPane.showMessageDialog(null, "YOU WIN");
-                 setupGame("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\winning.wav");//activating music
                 try {
                     LevelTwo.levelTwoScene(gp, sceneLevelTwo, root,window);
                 } catch (FileNotFoundException ex) {
@@ -432,7 +455,9 @@ circle3.setFill(image_Coin);
       
   
 } 
-     
+    /**
+     * Stops the timer.
+     */ 
      public static void timerStop(){
          STARTTIME=50;
          /* timerLabel.textProperty().bind(timeSeconds.asString());//label adding
@@ -451,6 +476,10 @@ circle3.setFill(image_Coin);
                 timeline.playFromStart();
                 
      }
+     
+     public static Label getLabel(){
+        return lifeSpan;
+    }
      
      }
     

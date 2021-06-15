@@ -17,10 +17,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-/**
- *
- * @author USER
- */
+
 public class ProtectiveSuit {
    static int x;
    static int y;
@@ -37,7 +34,7 @@ public class ProtectiveSuit {
           y=308;
       }
       else if(intRandom==2){
-          x=276;
+          x=310;
           y=391;
       }
       else{
@@ -45,30 +42,13 @@ public class ProtectiveSuit {
           y=604;
       }
          Rectangle rectShield=new Rectangle(x,y,40,40);
-        FileInputStream inputShield = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\bulletproof-vest.png");//adding image to the character
+        FileInputStream inputShield = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\bulletproof-vest.png");//adding image to the character
         Image imgShield = new Image(inputShield);//passing image object as parameter
         ImagePattern image_Shield = new ImagePattern(imgShield, 156,390, 1, 1, true);//passing image object,coordinates,ratio as parameter
        rectShield.setFill(image_Shield);
        layout.getChildren().add(rectShield);//passing rectangle object as a parameter
        return rectShield;
     }
-/*  public static void rectCollisin(Rectangle shot,Rectangle rect)
-  {
-      shot.boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
-        @Override
-        public void changed(ObservableValue<? extends Bounds> arg0,Bounds oldValue, Bounds newValue) {
-            if(rect.getBoundsInParent().intersects(newValue)){
-               // System.out.println("Collide ============= Collide");
-                 
-                System.out.println("hit");
-                       
-            }
-        }
 
-         
-    });
-      
-  
-  }*/
     
 }

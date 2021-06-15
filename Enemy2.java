@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * File:GAME1.java
  */
 package game1;
 
@@ -32,8 +30,9 @@ import javafx.util.Duration;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author USER
+ * This class controls the path and speed and collision of the enemy 2.
+ * @author Tahsina Bintay Azam
+ * 
  */
 public class Enemy2 {
          private static  Integer STARTTIME5 = 2;
@@ -42,10 +41,18 @@ public class Enemy2 {
     private static IntegerProperty timeSeconds5 = new SimpleIntegerProperty(STARTTIME5);
     private static Rectangle rect3;
    private static javafx.animation.PathTransition pathTransition;
+   /**
+    * Controls the path transition and collision
+    * @param rect
+    * @param layout
+    * @param plrScore
+    * @param r
+    * @throws FileNotFoundException 
+    */
      public static void enemyChar(Rectangle rect,Group layout,Label plrScore,int r) throws FileNotFoundException{
         rect3 = new Rectangle(20,20,40,40);//creating enemy object
        //adding pictures to the enemy
-       FileInputStream input = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\rocksteady.png");
+       FileInputStream input = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\rocksteady.png");
         Image img3 = new Image(input);
        
         ImagePattern image_pattern = new ImagePattern(img3, 20, 20, 1, 1, true);
@@ -112,22 +119,24 @@ public class Enemy2 {
                // System.out.println("Collide ============= Collide");
                 //JOptionPane.showMessageDialog(null, "Game over");
                 //setting the score to zero when rect will collide with rect3
-              if(r==1)
+              if(GameScene.lifeLine<=0)
                     {
+                        setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\lose.wav");//activating music
                         JOptionPane.showMessageDialog(null, "Game over");
-                         setupGame("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\lose.wav");//activating music
+                         //setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\lose.wav");//activating music
                         GameScene.timerStop();
                         int zero=0;
                 plrScore.setText(Integer.toString(zero));
                 rect.setLayoutX(7);
                 rect.setLayoutY(2);
                 GameScene.playerScore=0;
-                        
+                GameScene.lifeLine=100;     
                     }
-                  else if(r==2 && timeSeconds5.getValue()==0)
+                  else if(r==2 && timeSeconds5.getValue()==0 && GameScene.lifeLine<=0)
                   {
+                      setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\lose.wav");//activating music
                       JOptionPane.showMessageDialog(null, "Game over");
-                       setupGame("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\lose.wav");//activating music
+                      // setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\lose.wav");//activating music
                       LevelTwo.timerStop();
                       LevelTwo.autoScroll();
                       int zero=0;
@@ -135,13 +144,20 @@ public class Enemy2 {
                 rect.setLayoutX(7);
                 rect.setLayoutY(2);
                 GameScene.playerScore=0;
-    
+                GameScene.lifeLine=100;
+                 Label life= GameScene.getLabel();
+                       Label life2=LevelTwo.getLabels();
+                       Label life3=LevelThree.getLabelso();
+                       life.setText(Integer.toString(GameScene.lifeLine)); 
+                       life2.setText(Integer.toString(GameScene.lifeLine));
+                       life3.setText(Integer.toString(GameScene.lifeLine));
                       
                   }
-                  else if(r==3 && timeSeconds5.getValue()==0)
+                  else if(r==3 && timeSeconds5.getValue()==0 && GameScene.lifeLine<=0)
                   {
+                      setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\lose.wav");//activating music
                       JOptionPane.showMessageDialog(null, "Game over");
-                       setupGame("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\lose.wav");//activating music
+                      // setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\lose.wav");//activating music
                       LevelThree.timerStop();
                       LevelThree.autoScroll2();
                       int zero=0;
@@ -149,13 +165,34 @@ public class Enemy2 {
                 rect.setLayoutX(7);
                 rect.setLayoutY(2);
                 GameScene.playerScore=0;
+                GameScene.lifeLine=100;
+                 Label life= GameScene.getLabel();
+                       Label life2=LevelTwo.getLabels();
+                       Label life3=LevelThree.getLabelso();
+                       life.setText(Integer.toString(GameScene.lifeLine)); 
+                       life2.setText(Integer.toString(GameScene.lifeLine));
+                       life3.setText(Integer.toString(GameScene.lifeLine));
                    
+                  }
+                if(GameScene.lifeLine>0 && timeSeconds5.getValue()==0 )
+                  {
+                     
+                        GameScene.lifeLine--;
+                       Label life= GameScene.getLabel();
+                       life.setText(Integer.toString(GameScene.lifeLine)); 
+                        Label life2=LevelTwo.getLabels();
+                       Label life3=LevelThree.getLabelso();
+                       life2.setText(Integer.toString(GameScene.lifeLine));
+                       life3.setText(Integer.toString(GameScene.lifeLine));
                   }
             }
         }
     });
         
     }
+     /**
+      * Starts the timer when you need to play the level more than once.
+      */
      public static void startTimer(){
      STARTTIME5=15;
         if (timeLine5 != null) {
@@ -170,6 +207,10 @@ public class Enemy2 {
       public static Rectangle getEnemy2(){
      return rect3;
  }    
+      
+  /**
+  * Stops and replays the enemy when needed 
+  */
     public static void getTransition(){
           Timeline playtime = new Timeline(
     new KeyFrame(Duration.seconds(0.1), event -> pathTransition.play()),            

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * File:GAME1.java
  */
 package game1;
 
@@ -52,7 +50,7 @@ public class RegistrationScene extends Scene{
       TextField mobilePhoneNoField=new TextField();
       
       //Creating buttons
-      Button submitButton=new Button("Sign in");//passing a string as parameter which will be shown as the name
+      Button submitButton=new Button("Sign up");//passing a string as parameter which will be shown as the name
       Button clearButton=new Button("Clear");//passing a string as parameter which will be shown as the name
       Button backLogin=new Button("Go back and login");//passing a string as parameter which will be shown as the name
 
@@ -102,7 +100,7 @@ public class RegistrationScene extends Scene{
      
       
       //adding image to the gridpane:
-      Image image = new Image(new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\interface.jpg")); //path of the image is given here for first scene;
+      Image image = new Image(new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\interface.jpg")); //path of the image is given here for first scene;
 grid.setBackground(new Background(new BackgroundImage(image,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT)));
           
    String styles =

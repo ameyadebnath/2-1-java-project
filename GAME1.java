@@ -1,3 +1,4 @@
+//File: GAME1.java
 package game1;
 
 import java.io.File;
@@ -35,8 +36,9 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
 /**
- *
- * @author USER
+ * this is a class which holds , initiates and controls the starting portion of the game
+ * @author Tahsina Bintay Azam
+ * 
  */
 public class GAME1 extends Application { 
 
@@ -51,7 +53,12 @@ public class GAME1 extends Application {
     private int y = 25;
     private int speedX = 1;
     private int speedY = 1;
-  
+    
+  /**
+   * This method controls mouse events and sets the initial scene to the stage.
+   * @param primaryStage
+   * @throws FileNotFoundException 
+   */
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
         this.window = primaryStage;
@@ -73,8 +80,8 @@ public class GAME1 extends Application {
           
            
         });
-       
-        registerButton.setOnKeyPressed(//settinh keyboard control for register button
+       /**setting keyboard control for register button*/
+        registerButton.setOnKeyPressed(
                 event -> {
                     switch (event.getCode()) {
                         case ENTER:
@@ -107,20 +114,26 @@ GridPane registrationSceneLayout=new GridPane();//creating gridpane
         regiCompleteButton.setOnAction(e -> window.setScene(initialScene));//adding control to the button
         //adding complete.
 
-             
-        window.setScene(initialScene);//passing the scene as parameter which the user will se first
-        setupGame("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\IntroMusic.wav");//activating music
+         /**passing the scene as parameter which the user will see first*/    
+        window.setScene(initialScene);
+        setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\happy_background.wav");//activating music
         window.show();
         
         
     }
-
+    /**
+     * This is the main class from which out program will start operating.
+     * @param args 
+     */
     public static void main(String[] args) {
         //setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\IntroMusic.wav");//activating music
         launch(args);
     }
 
-    //adding audio to the file:
+   /**
+    * Controls the sounds of this game.
+    * @param filePath 
+    */
     public static void setupGame(String filePath) { 
         InputStream music;
         try {

@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * File:GAME1.java
  */
 package game1;
 
@@ -30,7 +28,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javax.swing.JOptionPane;
 
-
+/**
+ * This class controls the path and speed and collision of the enemy 3.
+ * @author Tahsina Bintay Azam
+ * 
+ */
 public class Level2Enemy3 {
      private static  Integer STARTTIME6 = 2;
     private static Timeline timeLine6;
@@ -38,10 +40,18 @@ public class Level2Enemy3 {
     private static IntegerProperty timeSeconds6 = new SimpleIntegerProperty(STARTTIME6);
     private static Rectangle rect4;
     private static javafx.animation.PathTransition pathTransition;
+    /**
+     * Controls the path transition and collision 
+     * @param rect
+     * @param layout
+     * @param plrScore
+     * @param r
+     * @throws FileNotFoundException 
+     */
     public static void enemyChar(Rectangle rect,Group layout,Label plrScore,int r) throws FileNotFoundException{
         rect4 = new Rectangle(20,20,40,40);//creating anime object
         //adding pictures to rectangle below:
-        FileInputStream input = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\rocksteady.png");
+        FileInputStream input = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\rocksteady.png");
         Image img3 = new Image(input);
         ImagePattern image_pattern = new ImagePattern(img3, 20, 20, 1, 1, true);
        rect4.setFill(image_pattern);
@@ -61,15 +71,15 @@ public class Level2Enemy3 {
         path.getElements().add(new LineTo(574,230));//prob
         path.getElements().add(new LineTo(754,230));
         path.getElements().add(new LineTo(754,695));
-        /*path.getElements().add(new LineTo(277,335));
+      /*  path.getElements().add(new LineTo(277,335));
         path.getElements().add(new LineTo(330,335));
         path.getElements().add(new LineTo(330,465));
         path.getElements().add(new LineTo(440,465));
-       // path.getElements().add(new LineTo(300,465));*/
+        path.getElements().add(new LineTo(300,465));*/
        
 
          pathTransition = new javafx.animation.PathTransition();
-        pathTransition.setDuration(Duration.millis(17000));//setting path duration time , sending it as parameter
+        pathTransition.setDuration(Duration.millis(21000));//setting path duration time , sending it as parameter
         Node cbTypeCrc;
         pathTransition.setNode(rect4);//passing rect4 as parameter and selecting it as the node for path transition
         pathTransition.setPath(path);//selecting path for the enemy to move
@@ -102,10 +112,29 @@ public class Level2Enemy3 {
         public void changed(ObservableValue<? extends Bounds> arg0,Bounds oldValue, Bounds newValue) {
             if(rect.getBoundsInParent().intersects(newValue)){
                 //setting the score to zero when rect will collide with rect3
-                   if(r==2 && timeSeconds6.getValue()==0)
+                 if(GameScene.lifeLine<=0)
+                    {
+                        setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\lose.wav");//activating music
+                        JOptionPane.showMessageDialog(null, "Game over");
+                         //setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\lose.wav");//activating music
+                        GameScene.timerStop();
+                        int zero=0;
+                plrScore.setText(Integer.toString(zero));
+                rect.setLayoutX(7);
+                rect.setLayoutY(2);
+                GameScene.playerScore=0;
+                GameScene.lifeLine=100; 
+                 Label life= GameScene.getLabel();
+                       Label life2=LevelTwo.getLabels();
+                       Label life3=LevelThree.getLabelso();
+                       life.setText(Integer.toString(GameScene.lifeLine)); 
+                       life2.setText(Integer.toString(GameScene.lifeLine));
+                       life3.setText(Integer.toString(GameScene.lifeLine));
+                    }
+                 else if(r==2 && timeSeconds6.getValue()==0 && GameScene.lifeLine<=0)
                   {
+                      setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\lose.wav");//activating music
                       JOptionPane.showMessageDialog(null, "Game over");
-                       setupGame("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\lose.wav");//activating music
                       LevelTwo.timerStop();
                       LevelTwo.autoScroll();
                       int zero=0;
@@ -113,12 +142,19 @@ public class Level2Enemy3 {
                 rect.setLayoutX(7);
                 rect.setLayoutY(2);
                 GameScene.playerScore=0;
+                GameScene.lifeLine=100; 
+                 Label life= GameScene.getLabel();
+                       Label life2=LevelTwo.getLabels();
+                       Label life3=LevelThree.getLabelso();
+                       life.setText(Integer.toString(GameScene.lifeLine)); 
+                       life2.setText(Integer.toString(GameScene.lifeLine));
+                       life3.setText(Integer.toString(GameScene.lifeLine));
                       
                   }
-                  else if(r==3 && timeSeconds6.getValue()==0)
+                  else if(r==3 && timeSeconds6.getValue()==0 && GameScene.lifeLine<=0)
                   {
+                      setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\lose.wav");//activating music
                       JOptionPane.showMessageDialog(null, "Game over");
-                       setupGame("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\lose.wav");//activating music
                       LevelThree.timerStop();
                       LevelThree.autoScroll2();
                       int zero=0;
@@ -126,8 +162,25 @@ public class Level2Enemy3 {
                 rect.setLayoutX(7);
                 rect.setLayoutY(2);
                 GameScene.playerScore=0;
-                
+                GameScene.lifeLine=100; 
+                 Label life= GameScene.getLabel();
+                       Label life2=LevelTwo.getLabels();
+                       Label life3=LevelThree.getLabelso();
+                       life.setText(Integer.toString(GameScene.lifeLine)); 
+                       life2.setText(Integer.toString(GameScene.lifeLine));
+                       life3.setText(Integer.toString(GameScene.lifeLine));
                       
+                  }
+                    if(GameScene.lifeLine>0 && timeSeconds6.getValue()==0 )
+                  {
+                     
+                        GameScene.lifeLine--;
+                       Label life= GameScene.getLabel();
+                       life.setText(Integer.toString(GameScene.lifeLine)); 
+                       Label life2=LevelTwo.getLabels();
+                       Label life3=LevelThree.getLabelso();
+                       life2.setText(Integer.toString(GameScene.lifeLine));
+                       life3.setText(Integer.toString(GameScene.lifeLine));
                   }
             }
         }
@@ -136,6 +189,9 @@ public class Level2Enemy3 {
     });
         
     }
+    /**
+     * Starts the timer when you need to play the level more than once.
+     */
   public static void startTimer(){
      STARTTIME6=15;
         if (timeLine6 != null) {
@@ -151,6 +207,9 @@ public class Level2Enemy3 {
     public static Rectangle getEnemy3(){
      return rect4;
  }
+  /**
+  * Stops and replays the enemy when needed 
+  */
     public static void getTransition(){
           Timeline playtime = new Timeline(
     new KeyFrame(Duration.seconds(0.1), event -> pathTransition.play()),            

@@ -2,6 +2,7 @@
 package game1;
 
 import static game1.GAME1.setupGame;
+import static game1.GameScene.lifeLine;
 import static game1.GameScene.playerScore;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,7 +39,11 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.swing.JOptionPane;
 
-public class LevelTwo extends GAME1{
+/**
+ * This is the class which is mainly in charge of the level two of this game.
+ * @author Tahsina Bintay Azam
+ */
+public class LevelTwo extends GAME1 {
     private static int x = 2;
     private static int y = 2;
     private static int z = 2;
@@ -49,15 +54,24 @@ public class LevelTwo extends GAME1{
      static int labelY2=390;
      static int labelY3=225;
      static int labelY4= 350; 
+     private static Label lifeSpan2=new Label();//new label object
      private static  Integer STARTTIME2 = 70;
     private static Timeline timeLine2;
     private static Label timerLabel2 = new Label();
     private static IntegerProperty timeSeconds2 = new SimpleIntegerProperty(STARTTIME2);
-    private static ScrollPane scrollPane = new ScrollPane();           
+    private static ScrollPane scrollPane = new ScrollPane();       
+/**
+ * sets up the whole interface of the level 2 of this game.
+ * @param gp
+ * @param scene
+ * @param root
+ * @param window
+ * @throws FileNotFoundException 
+ */    
     public static void levelTwoScene(Group gp,Scene scene,VBox root,Stage window)throws FileNotFoundException{
      
-        
-      Image image = new Image(new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\surface.png")); //path of the image is given here for first scene;
+      /**path of the image is given here for first scene; */ 
+      Image image = new Image(new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\surface.png")); 
 
              scrollPane.setFitToHeight(true);
              scrollPane.setFitToWidth(true);
@@ -66,7 +80,7 @@ public class LevelTwo extends GAME1{
              
             timerLabel2.textProperty().bind(timeSeconds2.asString());
         timerLabel2.setTextFill(Color.BLACK);
-        timerLabel2.setLayoutX(390);
+        timerLabel2.setLayoutX(330);
         timerLabel2.setLayoutY(0);
         timerLabel2.setStyle("-fx-font-size: 1.2em;");
         if (timeLine2 != null) {
@@ -79,7 +93,7 @@ public class LevelTwo extends GAME1{
                 timeLine2.playFromStart();
                 Label timer=new Label("TIMER:");
                 timer.setTextFill(Color.BLACK);//passing the color of the label as the parameter
-                timer.setLayoutX(340);
+                timer.setLayoutX(280);
                 timer.setLayoutY(0);
                 timer.setStyle("-fx-font-size: 1.3em;");
                
@@ -87,20 +101,35 @@ public class LevelTwo extends GAME1{
              Label goal = new Label("GOAL:60");//the parameter is a string which will show the target of the player in the console
         goal.setTextFill(Color.BLACK);//passing the color of the label as the parameter
         goal.setStyle("-fx-font-size: 1.2em;");///newwwwllllyyy added
-      goal.setLayoutX(200);
+      goal.setLayoutX(140);
        goal.setLayoutY(0);
         Label score=new Label("SCORE:");//new label
         score.setTextFill(Color.BLACK);//passing col
         score.setStyle("-fx-font-size: 1.2em;");
-      score.setLayoutX(270);
+      score.setLayoutX(210);
       score.setLayoutY(0);
       
          Label plrScore=new Label();//new label object
         plrScore.setTextFill(Color.BLACK);
         plrScore.setText(Integer.toString(playerScore));//setting the score which is a variable and making it string
         plrScore.setStyle("-fx-font-size: 1.2em;");
-        plrScore.setLayoutX(320);
+        plrScore.setLayoutX(260);
         plrScore.setLayoutY(0);
+        
+             Label life=new Label("LIFE:");
+        life.setTextFill(Color.BLACK);
+        life.setAlignment(Pos.BOTTOM_CENTER);
+        life.setLayoutX(360);
+        life.setLayoutY(0);
+        life.setStyle("-fx-font-size: 1.3em;");
+       
+       // Label lifeSpan=new Label();//new label object
+        lifeSpan2.setTextFill(Color.BLACK);
+        lifeSpan2.setAlignment(Pos.BOTTOM_CENTER);
+        lifeSpan2.setText(Integer.toString(lifeLine));//setting the score which is a variable and making it string
+       lifeSpan2.setLayoutX(390);
+       lifeSpan2.setLayoutY(0);
+        lifeSpan2.setStyle("-fx-font-size: 1.3em;");
       
         
             ImageView img_exp=new ImageView(image);
@@ -109,7 +138,7 @@ public class LevelTwo extends GAME1{
         marks.getChildren().add(img_exp);
         img_exp.setFitWidth(650); //th
         img_exp.setFitHeight(20);
-        marks.getChildren().addAll(goal,score,plrScore,timer,timerLabel2); 
+        marks.getChildren().addAll(goal,score,plrScore,timer,timerLabel2,life,lifeSpan2); 
              
               ArrayList<Line> lineArrayList = new ArrayList<Line>();//declaration of a arraylist of line which will form the maze
         lineArrayList.add(new Line(2.0,3.00,838.0,3.0));//passing the coordinates of start and ending point of the line
@@ -171,11 +200,11 @@ public class LevelTwo extends GAME1{
              
             ImageView backgroundImg = new ImageView(image);
             Rectangle rect=new Rectangle(10,10,40,40);
-            FileInputStream input = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\shredder.png");//adding image to the character
+            FileInputStream input = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\shredder.png");//adding image to the character
         Image img3 = new Image(input);//passing image object as parameter
         ImagePattern image_pattern = new ImagePattern(img3, 10, 10, 1, 1, true);//passing image object,coordinates,ratio as parameter
         
-         FileInputStream inputBullet = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\bomb.png");//adding character to the bullet
+         FileInputStream inputBullet = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\ScrollingImage\\src\\bomb.png");//adding character to the bullet
         Image imgBullet = new Image(inputBullet);//passing image object as parameter
       //  ImagePattern imgptrn_bullet = new ImagePattern(imgBullet, projectileRadius, 10, 1, 1, true);//passing image object,coordinates,ratio as parameter
                  
@@ -192,23 +221,21 @@ public class LevelTwo extends GAME1{
      
         root.getChildren().addAll(scrollPane,marks);
         //scene.setRoo(root);
-         EnemyClass.enemyChar(rect,gp,plrScore,2);//calling enemy class--------------------------------------------------------------------------->
-        Enemy2.enemyChar(rect,gp,plrScore,2);//calling another-------------------------------------------------------------------------------------->
+         EnemyClass.enemyChar(rect,gp,plrScore,2);//calling enemy class
+        Enemy2.enemyChar(rect,gp,plrScore,2);//calling another
         Level2Enemy3.enemyChar(rect, gp, plrScore,2);//calling 3rd enemy class
         Rectangle rect2=HomeChar.homeChar(rect, gp);//adding destination object to the group
         
-        //creation of panes for the third level
+        /**creation of panes for the third level*/
         VBox rootL3=new VBox();
         Scene sceneLevelThree=new Scene(rootL3,600,600);
         Group groupL3=new Group();
         
-        //coins
-        
-        //adding picture to the coin
- FileInputStream inputCoin = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\download.jpg");//creating the picture of the gold coin
+        //**adding picture to the coin*/
+ FileInputStream inputCoin = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\download.jpg");//creating the picture of the gold coin
         Image imgCoin = new Image(inputCoin);
         ImagePattern image_Coin = new ImagePattern(imgCoin, 340, 350, 1,1 , true);        
-       Circle circle1 = new Circle(); //creating circle as object
+       Circle circle1 = new Circle(); //**creating circle as object*/
         circle1.setCenterX(330.0f);//setting the center of the circle
 circle1.setCenterY(340.0f);
 circle1.setRadius(10.0f);
@@ -216,7 +243,7 @@ circle1.setFill(image_Coin);
 
 
 //diamond coin making
-      FileInputStream inputCoind = new FileInputStream("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\vector-diamonds.png");//creating the picture of the diamond coin
+      FileInputStream inputCoind = new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\vector-diamonds.png");//creating the picture of the diamond coin
         Image imgCoind = new Image(inputCoind);
         ImagePattern image_Coind = new ImagePattern(imgCoind, 330, 350, 1,1 , true);        
        Circle circle2 = new Circle(); 
@@ -512,11 +539,10 @@ circle3.setFill(image_Coin);
       }
         if(rect.getBoundsInParent().intersects(rect2.getBoundsInParent())){
            
-            if(playerScore>=60 && timeSeconds2.getValue()>0)
+            if(playerScore>=6 && timeSeconds2.getValue()>0)
             {
-                
+                 setupGame("C:\\Users\\USER\\Documents\\NetBeansProjects\\GAME1\\src\\winning.wav");//activating music
                 JOptionPane.showMessageDialog(null, "YOU WIN");
-                 setupGame("F:\\Project\\2-1 java\\2_1 project\\game1\\src\\game1\\winning.wav");//activating music
                 try {
                     LevelThree.levelThreeScene(groupL3, sceneLevelThree, rootL3);
                 } catch (FileNotFoundException ex) {
@@ -532,6 +558,9 @@ circle3.setFill(image_Coin);
                 scrollPane.setHvalue(0);
                 scrollPane.setVvalue(0);
                playerScore=0;
+              GameScene.lifeLine=100;
+               Label life2=LevelTwo.getLabels();
+               life2.setText(Integer.toString(GameScene.lifeLine));
                  if(k==2){
               rectShield.setLayoutX(rectShield.getLayoutX()+60);
               rectShield.setLayoutY(rectShield.getLayoutY()-66.67);
@@ -566,6 +595,9 @@ circle3.setFill(image_Coin);
         });
         
     }
+    /**
+     * Stops the timer
+     */
      public static void timerStop(){
          
          STARTTIME2=70;
@@ -582,12 +614,18 @@ circle3.setFill(image_Coin);
                 timeLine2.playFromStart();
                 
      }             
-     
+     /**
+      * Sets the scroll bar of the scroll pane in it's initial position
+      */
      public static void autoScroll(){
                 scrollPane.setHvalue(0);
                 scrollPane.setVvalue(0);  
                 playerScore=0;
      }
+     
+      public static Label getLabels(){
+        return lifeSpan2;
+    }
         
     }
     
